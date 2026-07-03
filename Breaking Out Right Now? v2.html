@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Breaking Out Right Now? — Clearmode</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { height: 100%; }
+  html { overflow-y: auto; -webkit-overflow-scrolling: touch; }
+
+  :root {
+    --cream: #FAF8F5;
+    --white: #ffffff;
+    --coral: #E8614A;
+    --coral-light: #FDF0EE;
+    --coral-mid: #F5C4BB;
+    --teal: #3D7A72;
+    --teal-light: #EAF3F2;
+    --teal-mid: #A8CEC9;
+    --sand: #C4A882;
+    --sand-light: #F7F2EC;
+    --text-dark: #1A1A1A;
+    --text-mid: #4A4A4A;
+    --text-light: #888888;
+    --border: #E8E2DA;
+    --step1: #E8614A;
+    --step2: #C4A882;
+    --step3: #3D7A72;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    line-height: 1.6;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* Header */
+  .eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+  }
+
+  .subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--coral);
+    margin-bottom: 20px;
+  }
+
+  .intro {
+    font-size: 15px;
+    color: var(--text-mid);
+    line-height: 1.7;
+    max-width: 600px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 40px;
+  }
+
+  /* Steps */
+  .step {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 24px;
+    margin-bottom: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .step:last-of-type {
+    border-bottom: none;
+  }
+
+  .step-number {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: 'Playfair Display', serif;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  .step-1 .step-number { background: var(--step1); color: white; }
+  .step-2 .step-number { background: var(--step2); color: white; }
+  .step-3 .step-number { background: var(--step3); color: white; }
+
+  .step-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 6px;
+  }
+
+  .step-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 3vw, 24px);
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 14px;
+    color: var(--text-dark);
+  }
+
+  .step-body {
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.75;
+    margin-bottom: 18px;
+  }
+
+  /* Tags */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .tag {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--text-mid);
+    background: var(--white);
+  }
+
+  .tag-teal {
+    border-color: var(--teal-mid);
+    color: var(--teal);
+    background: var(--teal-light);
+  }
+
+  .tag-coral {
+    border-color: var(--coral-mid);
+    color: var(--coral);
+    background: var(--coral-light);
+  }
+
+  /* Product cards */
+  .product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .product-card {
+    background: var(--teal-light);
+    border: 1px solid var(--teal-mid);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+
+  .product-card-check {
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid var(--teal);
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+
+  .product-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+  }
+
+  .product-sub {
+    font-size: 11px;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+
+  /* Trigger tags (step 2) */
+  .trigger-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  /* Closing callout */
+  .closing-callout {
+    background: var(--coral-light);
+    border: 1px solid var(--coral-mid);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-top: 8px;
+  }
+
+  .closing-eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 10px;
+  }
+
+  .closing-callout p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-mid);
+  }
+
+  /* Resources section */
+  .resources {
+    margin-top: 48px;
+    padding: 28px 32px;
+    background: var(--sand-light);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+
+  .resources-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 14px;
+  }
+
+  .resources-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .resources-list a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--teal);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .resources-list a::before {
+    content: '→';
+    font-size: 13px;
+  }
+
+  .resources-list a:hover {
+    color: var(--coral);
+    text-decoration: underline;
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer span {
+    font-size: 11px;
+    color: var(--text-light);
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 560px) {
+    body { padding: 32px 20px 60px; }
+    .product-grid { grid-template-columns: 1fr; }
+    .step { grid-template-columns: 40px 1fr; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+  <p class="eyebrow">Clearmode Acne Program · Client Resource</p>
+  <h1>Breaking out right now?</h1>
+  <p class="subtitle">Here's your protocol.</p>
+  <p class="intro">Step away from the mirror. There are exactly three things to do — in this order. No spiraling, no purging your skincare shelf, no new products. Just this.</p>
+
+  <!-- Step 1 -->
+  <div class="step step-1">
+    <div class="step-number">1</div>
+    <div>
+      <p class="step-label">Do This First</p>
+      <h2 class="step-title">Ice it. Twice a day, five minutes at a time.</h2>
+      <p class="step-body">Wrap an ice cube in a thin cloth and hold it directly on the inflamed area for 5 minutes. Do this morning and evening. Cold vasoconstricts the blood vessels underneath, which reduces redness, swelling, and the inflammatory cascade driving the breakout — without touching your skin barrier or introducing anything new into the equation. It's free. It works. It buys time while everything else catches up.</p>
+      <div class="tags">
+        <span class="tag">5 min each session</span>
+        <span class="tag">AM + PM</span>
+        <span class="tag tag-coral">Never ice directly on bare skin</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="step step-2">
+    <div class="step-number">2</div>
+    <div>
+      <p class="step-label">Play Detective</p>
+      <h2 class="step-title">Write down everything that's changed in the last 72 hours.</h2>
+      <p class="step-body">Microcomedones take up to 90 days to surface — but an acute flare that appears quickly usually has a recent trigger. Think back across the last three days and write down anything new, different, or off-script. New products, changed products, food, stress, travel, hormonal timing. Patterns don't lie, but you have to record them first.</p>
+      <div class="trigger-tags">
+        <span class="tag">Dairy</span>
+        <span class="tag">Fried foods</span>
+        <span class="tag">Peanut butter</span>
+        <span class="tag">Shellfish</span>
+        <span class="tag">Alcohol</span>
+        <span class="tag">Heavy sugar or refined carbs</span>
+        <span class="tag">Any new product</span>
+        <span class="tag">Skipped steps</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="step step-3">
+    <div class="step-number">3</div>
+    <div>
+      <p class="step-label">Spot Treat</p>
+      <h2 class="step-title">If you're not already using a spot treatment, start now.</h2>
+      <p class="step-body">Applied directly to active breakouts morning and night, a targeted spot treatment gets benzoyl peroxide or salicylic acid exactly where the inflammation is — without over-treating the surrounding skin. These are the two Face Reality products formulated for this exact moment in your protocol.</p>
+      <div class="product-grid">
+        <div class="product-card">
+          <span class="product-card-check"></span>
+          <p class="product-name">Acne Med</p>
+          <p class="product-sub">Face Reality · Apply AM and PM directly on active breakout areas</p>
+        </div>
+        <div class="product-card">
+          <span class="product-card-check"></span>
+          <p class="product-name">Spot Treatment</p>
+          <p class="product-sub">Face Reality · Apply AM and PM directly on active breakout areas</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing callout -->
+  <div class="closing-callout">
+    <p class="closing-eyebrow">One More Thing</p>
+    <p>A breakout mid-program is not the program failing. It's information. Bring your 72-hour log to your next appointment — the data is more useful than the frustration.</p>
+  </div>
+
+  <!-- Resources -->
+  <div class="resources">
+    <p class="resources-label">Other Resources to Check Out</p>
+    <ul class="resources-list">
+      <li><a href="https://app.notion.com/p/Clearmode-Member-Hub-3910fff00e8f807689cfe1df68b38128?source=copy_link" target="_blank">Clearmode Member Hub</a></li>
+    </ul>
+  </div>
+
+  <footer>
+    <span>Clearmode Acne Program · Client Resource</span>
+    <span>glowmode.com</span>
+  </footer>
+
+</body>
+</html>
